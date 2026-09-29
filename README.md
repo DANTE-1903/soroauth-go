@@ -183,7 +183,9 @@ as `cannot_check` and never as `verified`. Whether the key that signed is
 actually a signer of the account, and whether enough signers signed to meet its
 threshold, are account-state questions this command cannot see and does not
 claim to answer. A green result is evidence that the signatures on the entry
-commit to it; it is not a promise the transaction will succeed.
+commit to it; it is not a promise the transaction will succeed. The full
+statement of what a green result does and does not guarantee is in
+[docs/verification-limits.md](docs/verification-limits.md).
 
 ### Doctor — check the local environment for common first-run problems
 
@@ -833,6 +835,8 @@ Every document in the repository is listed, with one line on what it answers, in
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Golden vectors are never edited by hand.
 Security reports go through [SECURITY.md](SECURITY.md), not the issue tracker.
+For questions and where to send each kind of report, see
+[SUPPORT.md](SUPPORT.md).
 
 The Markdown in this repository is link-checked by the
 [`links` workflow](.github/workflows/links.yml) and spell-checked by the
@@ -845,4 +849,7 @@ moving elsewhere is not a regression here.
 
 ## License
 
-Apache-2.0. See [LICENSE](LICENSE).
+Apache-2.0. See [LICENSE](LICENSE). Source files carry no per-file header by
+design; the reasoning is in
+[CONTRIBUTING.md](CONTRIBUTING.md#no-per-file-license-headers). To cite the
+project, use [CITATION.cff](CITATION.cff).
