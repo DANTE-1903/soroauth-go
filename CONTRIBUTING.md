@@ -87,6 +87,19 @@ golangci-lint run ./...
 go test -race ./...
 ```
 
+If your change touches any Markdown, format it too. The `vet and test` job runs
+`npx prettier --check '**/*.md'`, so an unformatted file fails the build:
+
+```sh
+npm ci                              # once, for the pinned formatter
+npx prettier --write '**/*.md'
+```
+
+This catches people out, because a branch written before that check existed
+fails on files it never touched. Running the line above fixes it. `CLAUDE.md`,
+the generated `e2e/RESULTS.md` and the committed vectors are excluded in
+`.prettierignore` and should stay that way.
+
 CI runs all of these except `golangci-lint`, plus the golden-vector drift check
 and the contract build; the signing-path budget check runs on push to main (see
 [Benchmarks](#benchmarks)). `golangci-lint` is a local gate only, because pull
