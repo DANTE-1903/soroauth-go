@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/ed25519"
 	"fmt"
+	"reflect"
 
 	"cloud.google.com/go/kms/apiv1/kmspb"
 	"github.com/googleapis/gax-go/v2"
@@ -44,7 +45,7 @@ type signer struct {
 // A nil client, an empty key version or an address that is not a classic
 // account is refused here.
 func NewSigner(address, keyVersion string, client AsymmetricSigner) (soroauth.Signer, error) {
-	if client == nil {
+	if isNilClient(client) {
 		return nil, fmt.Errorf("gcpkms: new signer: %s: %w", address, soroauth.ErrMissingSigner)
 	}
 	if keyVersion == "" {
@@ -100,4 +101,30 @@ func (s *signer) Sign(ctx context.Context, _ xdr.HashIdPreimage, payload [32]byt
 		return xdr.ScVal{}, fmt.Errorf("gcpkms: sign: %w", err)
 	}
 	return scval, nil
+}
+
+// isNilClient reports whether client is unusable: either a nil interface, or
+// an interface holding a nil pointer.
+//
+// The second case is the one that matters. A caller writing
+//
+//	var client *kms.KeyManagementClient
+//	NewSigner(addr, key, client)
+//
+// passes an interface with a concrete type and a nil value, so `client == nil`
+// is false and the guard above used to let it through. The signer then
+// constructed fine and panicked later, inside Sign, with a nil dereference —
+// at the moment it was being asked to authorize a transaction. Refusing at
+// construction turns that into an error the caller can see.
+func isNilClient(client any) bool {
+	if client == nil {
+		return true
+	}
+	v := reflect.ValueOf(client)
+	switch v.Kind() {
+	case reflect.Ptr, reflect.Interface, reflect.Map, reflect.Slice, reflect.Func, reflect.Chan:
+		return v.IsNil()
+	default:
+		return false
+	}
 }

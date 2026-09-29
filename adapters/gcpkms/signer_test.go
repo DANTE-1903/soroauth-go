@@ -210,3 +210,25 @@ func mustRawKey(t *testing.T, address string) []byte {
 	}
 	return parsed.AccountId.Ed25519[:]
 }
+
+// TestNewSignerRejectsATypedNilClient covers the trap that a plain
+// `client == nil` check misses.
+//
+// A caller writing `var client *kms.KeyManagementClient` and passing it hands
+// over an interface with a concrete type and a nil value. That is not equal to
+// nil, so the constructor used to accept it and return a signer that panicked
+// later, inside Sign, at the moment it was asked to authorize a transaction.
+func TestNewSignerRejectsATypedNilClient(t *testing.T) {
+	kp, err := keypair.Random()
+	if err != nil {
+		t.Fatalf("random keypair: %v", err)
+	}
+
+	var client *fakeKMS // typed nil, not a nil interface
+
+	if _, err := NewSigner(kp.Address(), testKeyVersion, client); err == nil {
+		t.Fatal("NewSigner accepted a typed-nil client; it would panic during Sign instead")
+	} else if !errors.Is(err, soroauth.ErrMissingSigner) {
+		t.Errorf("error %v does not wrap ErrMissingSigner", err)
+	}
+}
