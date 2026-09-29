@@ -3,8 +3,8 @@ package soroauth
 import (
 	"bytes"
 	"context"
-	"crypto/ed25519"
 	"crypto/ecdsa"
+	"crypto/ed25519"
 	"errors"
 	"fmt"
 	"net"
@@ -757,7 +757,6 @@ func ExampleNewAccountMultiSigner() {
 	// Output: signer address: GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWHF
 }
 
-
 func ExampleNewPasskeySignerFromAssertion() {
 	var pubKey ecdsa.PublicKey
 	assertion := &WebAuthnAssertion{
@@ -772,7 +771,7 @@ func ExampleNewPasskeySignerFromAssertion() {
 		&pubKey,
 		assertion,
 	)
-	
+
 	fmt.Printf("signer address: %s\n", signer.Address())
 
 	// Output: signer address: GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWHF
