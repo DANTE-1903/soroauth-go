@@ -1,0 +1,38 @@
+# Store and check out every text file with LF endings, on every platform.
+#
+# The golden-vector and fuzz-corpus drift checks regenerate files and compare
+# them byte for byte with what is committed. A checkout that rewrote endings to
+# CRLF would make those checks fail on a clean tree, so the working copy is
+# pinned to LF rather than left to core.autocrlf.
+* text=auto eol=lf
+
+# Windows scripts are the one place CRLF is expected.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary artefacts: never normalise, never diff as text.
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.wasm binary
+
+# Generated files. linguist-generated collapses them in pull request diffs and
+# leaves them out of language statistics. Never edit them by hand; each comment
+# names the command that produces them.
+
+# node testdata/gen/gen.mjs and node testdata/gen/gen-passkey.mjs
+testdata/vectors/** linguist-generated=true
+
+# go run ./cmd/gencorpus
+testdata/fuzz/** linguist-generated=true
+
+# go run ./cmd/difffuzz
+testdata/differential/corpus/** linguist-generated=true
+
+# Dependency lockfiles, written by npm, go and cargo.
+package-lock.json linguist-generated=true
+go.sum linguist-generated=true
+Cargo.lock linguist-generated=true

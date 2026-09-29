@@ -699,3 +699,19 @@ and never paste vulnerability details into any public form.
 ## License
 
 By contributing you agree your contributions are licensed under Apache-2.0.
+
+### No per-file license headers
+
+Source files deliberately carry no license header. The whole repository is
+Apache-2.0, declared once in [LICENSE](LICENSE) at the root, which is what
+GitHub and `pkg.go.dev` read to report the license. Apache-2.0 does not require
+a header in each file: the boilerplate notice is in its appendix, which follows
+"END OF TERMS AND CONDITIONS" in [LICENSE](LICENSE), so it is guidance on
+applying the license rather than one of its terms. A header copied into hundreds
+of files adds nothing the root file does not already say, and a header that
+drifts from `LICENSE` would be worse than none.
+
+So do not add a header to a file you create, and do not add an SPDX line. Files
+copied in from another project under a different license are the exception: they
+keep their original notice, and the pull request says where they came from.
+Because no header is adopted, there is no CI check for one.
