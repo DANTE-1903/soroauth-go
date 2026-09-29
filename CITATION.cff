@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you cite soroauth in research or an audit write-up, please cite it using this metadata."
+type: software
+title: "soroauth-go"
+abstract: >-
+  A Go library and CLI that builds, signs and inspects Soroban authorization
+  entries: legacy address credentials, CAP-71 address-bound V2 credentials and
+  CAP-71 delegated-signer credentials.
+authors:
+  - name: "The soroauth-go contributors"
+repository-code: "https://github.com/soroauth/soroauth-go"
+url: "https://github.com/soroauth/soroauth-go"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-09-16
+keywords:
+  - stellar
+  - soroban
+  - authorization
+  - signing
+  - go

@@ -17,35 +17,38 @@ the architecture note and the guides is the one they need. The repository root
 
 ## Guides
 
-| Document                                      | Answers                                                                                                            |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [labels](labels.md)                           | What each complexity and area label means, who applies it, and who has the final say on complexity.                |
-| [signers](signers.md)                         | Which signer to use for a given threat model, and what evidence backs each one.                                    |
-| [passkeys](passkeys.md)                       | How to sign for a WebAuthn / passkey smart wallet, end to end.                                                     |
-| [migrating](migrating.md)                     | How to replace hand-rolled auth-entry signing with soroauth and verify it produced identical bytes.                |
-| [multi-party-signing](multi-party-signing.md) | How three parties sign one delegate tree in sequence, and why the expiration cannot change once anyone has signed. |
-| [verification-limits](verification-limits.md) | What `soroauth verify` can and cannot establish offline.                                                           |
-| [sdk-support](sdk-support.md)                 | Which `go-stellar-sdk` versions are supported and how the pin moves.                                               |
+| Document                                        | Answers                                                                                                            |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [labels](labels.md)                             | What each complexity and area label means, who applies it, and who has the final say on complexity.                |
+| [signers](signers.md)                           | Which signer to use for a given threat model, and what evidence backs each one.                                    |
+| [passkeys](passkeys.md)                         | How to sign for a WebAuthn / passkey smart wallet, end to end.                                                     |
+| [migrating](migrating.md)                       | How to replace hand-rolled auth-entry signing with soroauth and verify it produced identical bytes.                |
+| [multi-party-signing](multi-party-signing.md)   | How three parties sign one delegate tree in sequence, and why the expiration cannot change once anyone has signed. |
+| [verification-limits](verification-limits.md)   | What `soroauth verify` can and cannot establish offline.                                                           |
+| [verification-service](verification-service.md) | How to run the HTTP verification service, and what it will and will not do.                                        |
+| [sdk-support](sdk-support.md)                   | Which `go-stellar-sdk` versions are supported and how the pin moves.                                               |
 
 ## Reference
 
-| Document                                     | Answers                                                                                             |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [FIXTURES](FIXTURES.md)                      | What each e2e fixture contract exercises, and why none is a product.                                |
-| [ISSUE_BACKLOG](ISSUE_BACKLOG.md)            | The written-up work that is not done yet; `WAVE9_BACKLOG.json` is the newer Wave's source of truth. |
-| [diagrams](diagrams/README.md)               | The rendered signing-flow and delegate-tree diagrams, and their committed sources.                  |
-| [UPSTREAM_PROPOSAL](../UPSTREAM_PROPOSAL.md) | The proposal to add a minimal auth-entry signing helper to `go-stellar-sdk` itself.                 |
+| Document                                      | Answers                                                                                             |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [analyzer-heuristics](analyzer-heuristics.md) | What each risk-analyzer heuristic catches and what it misses.                                       |
+| [FIXTURES](FIXTURES.md)                       | What each e2e fixture contract exercises, and why none is a product.                                |
+| [ISSUE_BACKLOG](ISSUE_BACKLOG.md)             | The written-up work that is not done yet; `WAVE9_BACKLOG.json` is the newer Wave's source of truth. |
+| [diagrams](diagrams/README.md)                | The rendered signing-flow and delegate-tree diagrams, and their committed sources.                  |
+| [UPSTREAM_PROPOSAL](../UPSTREAM_PROPOSAL.md)  | The proposal to add a minimal auth-entry signing helper to `go-stellar-sdk` itself.                 |
 
 ## Testing and evidence
 
-| Document                                                             | Answers                                                                             |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| [e2e/README](../e2e/README.md)                                       | What each live testnet scenario proves, and how the two-pass simulation flow works. |
-| [e2e/RESULTS](../e2e/RESULTS.md)                                     | The transaction hashes and observed credential arms from a real testnet run.        |
-| [differential fuzzing](../testdata/differential/README.md)           | How random entries are checked across the Go, JS and Python implementations.        |
-| [frozen divergences](../testdata/differential/regressions/README.md) | The regression corpus of cases the implementations once disagreed on.               |
-| [Python parity](../testdata/parity-python/README.md)                 | How the vectors are recomputed with the Python `stellar-sdk`.                       |
-| [Rust parity](../testdata/parity-rust/README.md)                     | How the vectors are recomputed with the `stellar-xdr` crate the host itself uses.   |
+| Document                                                             | Answers                                                                                     |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [e2e/README](../e2e/README.md)                                       | What each live testnet scenario proves, and how the two-pass simulation flow works.         |
+| [e2e/RESULTS](../e2e/RESULTS.md)                                     | The transaction hashes and observed credential arms from a real testnet run.                |
+| [fuzzing](fuzzing.md)                                                | How the fuzz targets run continuously, and how a crash becomes a committed regression seed. |
+| [differential fuzzing](../testdata/differential/README.md)           | How random entries are checked across the Go, JS and Python implementations.                |
+| [frozen divergences](../testdata/differential/regressions/README.md) | The regression corpus of cases the implementations once disagreed on.                       |
+| [Python parity](../testdata/parity-python/README.md)                 | How the vectors are recomputed with the Python `stellar-sdk`.                               |
+| [Rust parity](../testdata/parity-rust/README.md)                     | How the vectors are recomputed with the `stellar-xdr` crate the host itself uses.           |
 
 ## Sub-project docs
 
